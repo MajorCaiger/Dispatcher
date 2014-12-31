@@ -1,5 +1,5 @@
 {
-    "name": "MajorCaiger/Dispatcher",
+    "name": "major-caiger/dispatcher",
     "description": "Dispatch to multiple controllers per request",
     "require": {
         "php": "~5.4",
