@@ -1,6 +1,8 @@
 Dispatcher
 ==========
-Dispatcher is a Zend Framework 2 module that allows you to configure each route to dispatch to multiple controllers per request, and then stitches together the views. This allows you to widgetize your application, and allows you to further seperate your code which makes it more re-useable and testable.
+Dispatcher is a Zend Framework 2 module that allows you to configure each route to dispatch to multiple controllers per
+request, and then stitches together the views. This allows you to widgetize your application, and allows you to further
+separate your code which makes it more re-useable and testable.
 
 ### Installation
 
