@@ -13,7 +13,7 @@ Dispatcher is a Zend Framework 2 module that allows you to configure each route 
 ...
 </pre>
 
-#### ZF2 Application
+###### ZF2 Application
 Add "Dispatcher" to the modules list in you're application.config.php
 
 ### Example
