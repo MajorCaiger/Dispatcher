@@ -3,7 +3,18 @@ Dispatcher
 Dispatcher is a Zend Framework 2 module that allows you to configure each route to dispatch to multiple controllers per request, and then stitches together the views. This allows you to widgetize your application, and allows you to further seperate your code which makes it more re-useable and testable.
 
 ### Installation
-Coming soon
+
+###### Via Composer
+<pre>
+...
+"require": {
+    "major-caiger/dispatcher": "~0.1"
+}
+...
+</pre>
+
+###### ZF2 Application
+Add "Dispatcher" to the modules list in you're application.config.php
 
 ### Example
 ###### module.config.php
