@@ -44,8 +44,11 @@ class DispatchListener extends ZendDispatchListener
         }
 
         if ($this->isPartialDispatch($e)) {
+
             $return = $this->partialDispatch($e);
             $return->setTerminal(true);
+            $e->setViewModel($return);
+
         } else {
             $return = $this->handleDispatch($e, $this->getDispatchName($e), $this->contentDispatch($e));
         }
