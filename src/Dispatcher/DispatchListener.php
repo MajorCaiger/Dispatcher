@@ -26,6 +26,8 @@ class DispatchListener extends ZendDispatchListener
 
     protected $dispatchName;
 
+    protected $routeAction;
+
     /**
      * Listen to the "dispatch" event
      *
@@ -34,6 +36,8 @@ class DispatchListener extends ZendDispatchListener
      */
     public function onDispatch(MvcEvent $e)
     {
+        $this->setRouteAction($e);
+
         $dispatchConfig = $this->getDispatchConfig($e);
         if (empty($dispatchConfig)) {
             return parent::onDispatch($e);
@@ -41,6 +45,7 @@ class DispatchListener extends ZendDispatchListener
 
         if ($this->isPartialDispatch($e)) {
             $return = $this->partialDispatch($e);
+            $return->setTerminal(true);
         } else {
             $return = $this->handleDispatch($e, $this->getDispatchName($e), $this->contentDispatch($e));
         }
@@ -48,6 +53,27 @@ class DispatchListener extends ZendDispatchListener
         $return = $this->complete($return, $e);
 
         return $return;
+    }
+
+    /**
+     * Set route action
+     *
+     * @param MvcEvent $e
+     */
+    protected function setRouteAction(MvcEvent $e)
+    {
+        $routeMatch = $e->getRouteMatch();
+        $this->routeAction = $routeMatch->getParam('action', 'not-found');
+    }
+
+    /**
+     * Getter for routeAction
+     *
+     * @return string
+     */
+    protected function getRouteAction()
+    {
+        return $this->routeAction;
     }
 
     /**
@@ -165,7 +191,7 @@ class DispatchListener extends ZendDispatchListener
         $routeMatch = $e->getRouteMatch();
         $controllerName = $routeMatch->getParam('controller', 'not-found');
 
-        return $this->dispatchController($e, $controllerName);
+        return $this->dispatchController($e, $controllerName, $this->getRouteAction());
     }
 
     /**
@@ -175,8 +201,10 @@ class DispatchListener extends ZendDispatchListener
      * @param string $controllerName
      * @return mixed
      */
-    protected function dispatchController(MvcEvent $e, $controllerName)
+    protected function dispatchController(MvcEvent $e, $controllerName, $action = 'dispatch')
     {
+        $routeMatch = $e->getRouteMatch();
+        $routeMatch->setParam('action', $action);
         $application = $e->getApplication();
         $events = $application->getEventManager();
         $controllerLoader = $application->getServiceManager()->get('ControllerManager');
