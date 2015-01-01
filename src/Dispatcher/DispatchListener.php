@@ -38,7 +38,7 @@ class DispatchListener extends ZendDispatchListener
     {
         $this->setRouteAction($e);
 
-        $dispatchConfig = $this->getDispatchConfig($e);
+        $dispatchConfig = $this->getDispatchConfigForRoute($e);
         if (empty($dispatchConfig)) {
             return parent::onDispatch($e);
         }
