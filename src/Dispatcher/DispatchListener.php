@@ -206,8 +206,8 @@ class DispatchListener extends ZendDispatchListener
      */
     protected function dispatchController(MvcEvent $e, $controllerName, $action = 'dispatch')
     {
-        $routeMatch = $e->getRouteMatch();
-        $routeMatch->setParam('action', $action);
+        //$routeMatch = $e->getRouteMatch();
+        //$routeMatch->setParam('action', $action);
         $application = $e->getApplication();
         $events = $application->getEventManager();
         $controllerLoader = $application->getServiceManager()->get('ControllerManager');

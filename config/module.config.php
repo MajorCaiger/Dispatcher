@@ -2,8 +2,10 @@
 
 return array(
     'service_manager' => array(
-        'invokables' => array(
-            'DispatchListener' => 'Dispatcher\DispatchListener',
+        'factories' => array(
+            'DispatchListener' => function ($sm) {
+                return new \Dispatcher\DispatchListener($sm->get('ControllerManager'));
+            },
         )
     )
 );
